@@ -1,6 +1,7 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
 
 export default {
+  mode: "jit",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,7 +13,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        mont: ["Montserrat", "sans-serif"],
+        open: ["Open Sans", "sans-serif"],
+      },
     },
   },
   plugins: [],
-} satisfies Config;
+} satisfies Config
