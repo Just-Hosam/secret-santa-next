@@ -27,8 +27,8 @@ export default function RootLayout({
           />
         </head>
         <body>
-          <nav className="flex justify-between p-6">
-            <Link href="/" className="text-3xl">
+          <nav className="flex justify-between p-6 gap-6">
+            <Link href="/" className="text-4xl flex-1">
               Secret Santa
             </Link>
             <AuthCheck>
