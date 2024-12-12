@@ -27,7 +27,7 @@ export default function RootLayout({
           />
         </head>
         <body>
-          <nav className="flex justify-between items-center mb-6 gap-6">
+          <nav className="flex justify-between items-center mb-6 gap-6 max-w-[1200px] m-auto">
             <Link href="/" className="text-2xl flex-1 font-light">
               Secret Santa
             </Link>
@@ -35,7 +35,7 @@ export default function RootLayout({
               <SignOutButton />
             </AuthCheck>
           </nav>
-          {children}
+          <div className="max-w-[700px] m-auto">{children}</div>
         </body>
       </html>
     </AuthProvider>
