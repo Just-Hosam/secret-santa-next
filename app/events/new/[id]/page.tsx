@@ -1,8 +1,8 @@
 import { ArrowLeftIcon } from "lucide-react"
-import EditEventForm from "./EditEventForm"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Event } from "@prisma/client"
+import EditEventForm from "../EditEventForm"
 
 interface Props {
   params: Promise<{ id: string }>
@@ -18,7 +18,7 @@ export default async function NewEvent({ params }: Props) {
 
   return (
     <div>
-      <Link href="/events">
+      <Link href={`/events/${id}`}>
         <Button className="mb-3" variant="ghost" size="icon">
           <ArrowLeftIcon />
         </Button>

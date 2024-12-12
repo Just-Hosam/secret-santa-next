@@ -7,7 +7,7 @@ import { Event } from "@prisma/client"
 import { redirect } from "next/navigation"
 
 interface Props {
-  event?: Event
+  event?: Event | null
 }
 
 export default function EditEventForm({ event }: Props) {
@@ -21,16 +21,15 @@ export default function EditEventForm({ event }: Props) {
     const body = {
       name: formData.get("name"),
       description: formData.get("description"),
+      id: "",
     }
 
     if (!body.name) return
+    if (!isCreatingEvent) body.id = event?.id
 
     const method = isCreatingEvent ? "POST" : "PUT"
-    const endpoint = isCreatingEvent
-      ? "/api/events"
-      : `/api/events/${event?.id}`
 
-    const res = await fetch(endpoint, {
+    const res = await fetch("/api/events", {
       method,
       body: JSON.stringify(body),
       headers: {
@@ -40,7 +39,7 @@ export default function EditEventForm({ event }: Props) {
 
     await res.json()
 
-    redirect("/events")
+    isCreatingEvent ? redirect("/events") : redirect(`/events/${event?.id}`)
   }
 
   return (
@@ -57,13 +56,13 @@ export default function EditEventForm({ event }: Props) {
       ></Input>
       <label htmlFor="description">Description</label>
       <Textarea
-        className="mt-1 mb-6"
+        className="mt-1 mb-6 min-h-[250px]"
         name="description"
         placeholder="Enter the event's description here!"
         defaultValue={event?.description || ""}
       />
       <Button type="submit" className="w-full">
-        {isCreatingEvent ? "Create" : "Edit"}
+        Save
       </Button>
     </form>
   )
