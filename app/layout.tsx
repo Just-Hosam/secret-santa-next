@@ -1,9 +1,9 @@
-import type { Metadata } from "next"
-import "./globals.css"
-import Link from "next/link"
-import { SignOutButton } from "@/components/layout/SignoutButton"
-import AuthProvider from "@/components/layout/AuthProvider"
 import AuthCheck from "@/components/layout/AuthCheck"
+import AuthProvider from "@/components/layout/AuthProvider"
+import { SignOutButton } from "@/components/layout/SignoutButton"
+import type { Metadata } from "next"
+import Link from "next/link"
+import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Secret Santa App",
@@ -29,7 +29,7 @@ export default function RootLayout({
         <body>
           <nav className="flex justify-between items-center mb-6 gap-6 max-w-[1200px] m-auto">
             <Link href="/" className="text-2xl flex-1 font-light">
-              Secret Santa
+              ScrtSnta
             </Link>
             <AuthCheck>
               <SignOutButton />

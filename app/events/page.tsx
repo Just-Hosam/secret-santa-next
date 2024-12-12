@@ -29,9 +29,11 @@ export default async function Events() {
       <div>
         {events.map((event: Event) => (
           <Link href={`/events/${event.id}`} key={event.id}>
-            <div className="border border-gray-400 rounded-2xl p-4 mb-3">
-              <h3 className="text-xl font-semibold mb-2">{event.name}</h3>
-              <p className="text-light text-sm">{event.description}</p>
+            <div className="border rounded-2xl p-4 mb-3">
+              <h3 className="text-xl font-semibold">{event.name}</h3>
+              {event?.description && (
+                <p className="text-light text-sm mt-2">{event.description}</p>
+              )}
             </div>
           </Link>
         ))}
