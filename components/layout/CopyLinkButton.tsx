@@ -13,8 +13,7 @@ export function CopyLinkButton({ link }: Props) {
   }
 
   return (
-    <Button variant="outline" className="ml-2" onClick={copyLink}>
-      Copy Link
+    <Button variant="outline" size="icon" className="ml-2" onClick={copyLink}>
       <LinkIcon />
     </Button>
   )

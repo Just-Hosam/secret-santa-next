@@ -59,3 +59,13 @@ export async function PUT(req: Request) {
 
   return NextResponse.json(event)
 }
+
+export async function DELETE(req: Request) {
+  const eventData = await req.json()
+
+  const event = await prisma?.event.delete({
+    where: { id: eventData.eventId },
+  })
+
+  return NextResponse.json(event)
+}

@@ -1,7 +1,7 @@
 import { CopyLinkButton } from "@/components/layout/CopyLinkButton"
 import { Button } from "@/components/ui/button"
 import { Participant } from "@prisma/client"
-import { ArrowLeftIcon, PencilIcon } from "lucide-react"
+import { ArrowLeftIcon, PencilIcon, SendIcon, Trash2Icon } from "lucide-react"
 import Link from "next/link"
 
 interface Props {
@@ -31,7 +31,18 @@ export default async function Event({ params }: Props) {
               <PencilIcon />
             </Button>
           </Link>
+          <Link href={`/events/delete/${id}`}>
+            <Button variant="ghost" size="icon">
+              <Trash2Icon />
+            </Button>
+          </Link>
           <CopyLinkButton link={`http://localhost:3000/participant/${id}`} />
+          <Link href={`/events/finish/${id}`}>
+            <Button className="ml-2">
+              Send
+              <SendIcon />
+            </Button>
+          </Link>
         </div>
       </div>
       <h2 className="text-3xl font-semibold mb-4">{event?.name}</h2>
