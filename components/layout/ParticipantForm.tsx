@@ -3,34 +3,26 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Event } from "@prisma/client"
-import { redirect } from "next/navigation"
 
 interface Props {
-  event?: Event | null
+  eventId: string
 }
 
-export default function EditEventForm({ event }: Props) {
-  const isCreatingEvent = !event
-
-  const updateEvent = async (e: React.FormEvent<HTMLFormElement>) => {
+export default function ParticipantForm({ eventId }: Props) {
+  const submitParticipant = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const formData = new FormData(e.currentTarget)
 
     const body = {
       name: formData.get("name"),
+      email: formData.get("email"),
       description: formData.get("description"),
-      id: "",
+      eventId,
     }
 
-    if (!body.name) return
-    if (!isCreatingEvent) body.id = event?.id
-
-    const method = isCreatingEvent ? "POST" : "PUT"
-
-    const res = await fetch("/api/events", {
-      method,
+    const res = await fetch("/api/participant", {
+      method: "POST",
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
@@ -38,12 +30,10 @@ export default function EditEventForm({ event }: Props) {
     })
 
     await res.json()
-
-    isCreatingEvent ? redirect("/events") : redirect(`/events/${event?.id}`)
   }
 
   return (
-    <form onSubmit={updateEvent}>
+    <form onSubmit={submitParticipant}>
       <label className="font-semibold" htmlFor="name">
         Name *
       </label>
@@ -51,8 +41,17 @@ export default function EditEventForm({ event }: Props) {
         className="mb-4 mt-1"
         type="text"
         name="name"
-        placeholder="Enter the event's name here!"
-        defaultValue={event?.name || ""}
+        placeholder="e.g. John Doe"
+        required
+      ></Input>
+      <label className="font-semibold" htmlFor="email">
+        Email *
+      </label>
+      <Input
+        className="mb-4 mt-1"
+        type="email"
+        name="email"
+        placeholder="e.g. j_doe@gmail.com"
         required
       ></Input>
       <label className="font-semibold" htmlFor="description">
@@ -61,11 +60,10 @@ export default function EditEventForm({ event }: Props) {
       <Textarea
         className="mt-1 mb-6 min-h-[250px]"
         name="description"
-        placeholder="Enter the event's description here!"
-        defaultValue={event?.description || ""}
+        placeholder="Enter the gifts you'd like!"
       />
       <Button type="submit" className="w-full">
-        Save
+        Submit
       </Button>
     </form>
   )
