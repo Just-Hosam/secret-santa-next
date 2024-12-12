@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <AuthProvider>
-      <html className="font-mont text-base" lang="en">
+      <html className="font-mont text-base px-6 pt-6 pb-10 " lang="en">
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -27,8 +27,8 @@ export default function RootLayout({
           />
         </head>
         <body>
-          <nav className="flex justify-between p-6 gap-6">
-            <Link href="/" className="text-4xl flex-1">
+          <nav className="flex justify-between items-center mb-6 gap-6">
+            <Link href="/" className="text-2xl flex-1 font-light">
               Secret Santa
             </Link>
             <AuthCheck>
