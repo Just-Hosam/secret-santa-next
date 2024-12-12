@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button"
+import { authOptions } from "@/lib/auth-options"
 import { Event } from "@prisma/client"
 import { PlusIcon } from "lucide-react"
 import { getServerSession } from "next-auth"
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { authOptions } from "../api/auth/[...nextauth]/route"
 
 export default async function Events() {
   const session = await getServerSession(authOptions)

@@ -1,11 +1,11 @@
 import AuthCheck from "@/components/layout/AuthCheck"
 import AuthProvider from "@/components/layout/AuthProvider"
 import { SignOutButton } from "@/components/layout/SignoutButton"
+import { authOptions } from "@/lib/auth-options"
 import type { Metadata } from "next"
+import { getServerSession } from "next-auth"
 import Link from "next/link"
 import "./globals.css"
-import { authOptions } from "./api/auth/[...nextauth]/route"
-import { getServerSession } from "next-auth"
 
 export const metadata: Metadata = {
   title: "Secret Santa App",
