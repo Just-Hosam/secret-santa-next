@@ -32,7 +32,7 @@ export default async function RootLayout({
           />
         </head>
         <body>
-          <nav className="flex justify-between items-center mb-3 gap-6 max-w-[1200px] m-auto py-6  top-0 left-0 right-0 bg-white sticky">
+          <nav className="flex justify-between items-center mb-1 gap-6 max-w-[1200px] m-auto py-6  top-0 left-0 right-0 bg-white sticky">
             <Link href="/" className="text-2xl flex-1 font-light">
               ScrtSnta
             </Link>

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { redirect } from "next/navigation"
 
 interface Props {
   eventId: string
@@ -30,6 +31,8 @@ export default function ParticipantForm({ eventId }: Props) {
     })
 
     await res.json()
+
+    redirect(`/participant/success`)
   }
 
   return (

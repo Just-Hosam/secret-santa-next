@@ -25,7 +25,7 @@ export default async function Event({ params }: Props) {
             <ArrowLeftIcon />
           </Button>
         </Link>
-        <div>
+        <div className="flex items-center">
           <Link href={`/events/new/${id}`}>
             <Button variant="ghost" size="icon">
               <PencilIcon />
