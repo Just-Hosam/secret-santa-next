@@ -44,15 +44,14 @@ export default function EditEventForm({ event }: Props) {
 
   return (
     <form onSubmit={updateEvent}>
-      <label className="" htmlFor="name">
-        Name
-      </label>
+      <label htmlFor="name">Name *</label>
       <Input
         className="mb-4 mt-1"
         type="text"
         name="name"
         placeholder="Enter the event's name here!"
         defaultValue={event?.name || ""}
+        required
       ></Input>
       <label htmlFor="description">Description</label>
       <Textarea

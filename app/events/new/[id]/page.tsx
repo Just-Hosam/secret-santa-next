@@ -1,20 +1,15 @@
+import { Button } from "@/components/ui/button"
 import { ArrowLeftIcon } from "lucide-react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Event } from "@prisma/client"
-import EditEventForm from "../EditEventForm"
+import EditEventForm from "../../../../components/layout/EditEventForm"
 
 interface Props {
   params: Promise<{ id: string }>
 }
 
-export default async function NewEvent({ params }: Props) {
+export default async function EditEvent({ params }: Props) {
   const { id } = await params
-  let event: Event | null = null
-
-  if (id) {
-    event = (await prisma?.event.findUnique({ where: { id: id } })) || null
-  }
+  const event = await prisma?.event.findUnique({ where: { id: id } })
 
   return (
     <div>
