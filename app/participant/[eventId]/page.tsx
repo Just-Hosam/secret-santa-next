@@ -1,4 +1,5 @@
 import ParticipantForm from "@/components/layout/ParticipantForm"
+import prisma from "@/lib/prisma"
 
 interface Props {
   params: Promise<{ eventId: string }>
