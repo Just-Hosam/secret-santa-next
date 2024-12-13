@@ -36,7 +36,9 @@ export default async function Event({ params }: Props) {
               <Trash2Icon />
             </Button>
           </Link>
-          <CopyLinkButton link={`http://localhost:3000/participant/${id}`} />
+          <CopyLinkButton
+            link={`${process.env.BASE_DOMAIN}/participant/${id}`}
+          />
           <Link href={`/events/finish/${id}`}>
             <Button className="ml-2">
               Send

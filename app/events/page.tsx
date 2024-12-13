@@ -12,8 +12,8 @@ export default async function Events() {
 
   if (isNotAuthenticated) redirect("/")
 
-  const events = await fetch("http://localhost:3000/api/events").then((res) =>
-    res.json()
+  const events = await fetch(`${process.env.BASE_DOMAIN}/api/events`).then(
+    (res) => res.json()
   )
 
   return (
