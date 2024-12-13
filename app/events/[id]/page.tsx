@@ -1,5 +1,6 @@
 import { CopyLinkButton } from "@/components/layout/CopyLinkButton"
 import { Button } from "@/components/ui/button"
+import prisma from "@/lib/prisma"
 import { Participant } from "@prisma/client"
 import { ArrowLeftIcon, PencilIcon, SendIcon, Trash2Icon } from "lucide-react"
 import Link from "next/link"
