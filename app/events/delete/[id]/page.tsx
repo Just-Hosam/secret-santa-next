@@ -1,5 +1,6 @@
 import DeleteEventButton from "@/components/layout/DeleteEventButton"
 import { Button } from "@/components/ui/button"
+import prisma from "@/lib/prisma"
 import { ArrowLeftIcon } from "lucide-react"
 import Link from "next/link"
 
