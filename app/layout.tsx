@@ -4,6 +4,7 @@ import { SignOutButton } from "@/components/layout/SignoutButton"
 import { authOptions } from "@/lib/auth-options"
 import type { Metadata } from "next"
 import { getServerSession } from "next-auth"
+import Image from "next/image"
 import Link from "next/link"
 import "./globals.css"
 
@@ -18,7 +19,6 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const session = await getServerSession(authOptions)
-  const firstName = session?.user?.name?.split(" ")[0]
 
   return (
     <AuthProvider>
@@ -33,12 +33,22 @@ export default async function RootLayout({
         </head>
         <body>
           <nav className="flex justify-between items-center mb-1 gap-6 max-w-[1200px] m-auto py-6  top-0 left-0 right-0 bg-white sticky">
-            <Link href="/" className="text-2xl flex-1 font-light">
-              ScrtSnta
+            <Link href="/">
+              <Image
+                src="/secret-santa-logo.png"
+                alt="Secret Santa Logo"
+                width={40}
+                height={40}
+              ></Image>
             </Link>
             <AuthCheck>
               <div className="flex items-center gap-2">
-                <p className="text-right">{firstName}</p>
+                <div className="text-right">
+                  <p>{session?.user?.name}</p>
+                  <p className="text-xs text-[10px] italic">
+                    {session?.user?.email}
+                  </p>
+                </div>
                 <SignOutButton />
               </div>
             </AuthCheck>

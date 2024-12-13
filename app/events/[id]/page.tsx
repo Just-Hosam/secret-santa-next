@@ -20,7 +20,7 @@ export default async function Event({ params }: Props) {
 
   return (
     <div>
-      <div className="mb-3 flex items-center justify-between gap-4">
+      <div className="mb-6 flex items-center justify-between gap-4">
         <Link href="/events">
           <Button variant="ghost" size="icon">
             <ArrowLeftIcon />
@@ -49,8 +49,8 @@ export default async function Event({ params }: Props) {
         </div>
       </div>
       <h2 className="text-3xl font-semibold mb-4">{event?.name}</h2>
-      <p className="mb-8">{event?.description}</p>
-      <h4 className="text-lg font-semibold">Participants</h4>
+      <p className="mb-10">{event?.description}</p>
+      <h4 className="text-xl font-semibold">Participants</h4>
       {participants?.length ? (
         <Participants participants={participants} />
       ) : (
@@ -66,8 +66,10 @@ const Participants = ({ participants }: { participants: Participant[] }) => {
     <div>
       {participants.map((participant) => (
         <div key={participant.id} className="mt-4 border-b pb-4 mb-4">
-          <h3 className="text-2xl font-semibold">{participant.name}</h3>
-          <p className="italic font-light text-[12px]">{participant.email}</p>
+          <h3 className="text-2xl">{participant.name}</h3>
+          <p className="italic font-light text-xs text-[9px]">
+            {participant.email}
+          </p>
           {participant?.description && (
             <p className="mt-2">{participant.description}</p>
           )}
