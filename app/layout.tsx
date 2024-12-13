@@ -42,10 +42,10 @@ export default async function RootLayout({
               ></Image>
             </Link>
             <AuthCheck>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <div className="text-right">
                   <p>{session?.user?.name}</p>
-                  <p className="text-xs text-[10px] italic">
+                  <p className="text-gray-500 text-xs text-[10px] italic">
                     {session?.user?.email}
                   </p>
                 </div>

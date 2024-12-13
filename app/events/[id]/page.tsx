@@ -49,7 +49,7 @@ export default async function Event({ params }: Props) {
         </div>
       </div>
       <h2 className="text-3xl font-semibold mb-4">{event?.name}</h2>
-      <p className="mb-10">{event?.description}</p>
+      <p className="mb-10 whitespace-pre-line">{event?.description}</p>
       <h4 className="text-xl font-semibold">Participants</h4>
       {participants?.length ? (
         <Participants participants={participants} />
@@ -67,11 +67,13 @@ const Participants = ({ participants }: { participants: Participant[] }) => {
       {participants.map((participant) => (
         <div key={participant.id} className="mt-4 border-b pb-4 mb-4">
           <h3 className="text-2xl">{participant.name}</h3>
-          <p className="italic font-light text-xs text-[9px]">
+          <p className="italic text-gray-500 font-light text-xs text-[10px]">
             {participant.email}
           </p>
           {participant?.description && (
-            <p className="mt-2">{participant.description}</p>
+            <p className="mt-2 whitespace-pre-line">
+              {participant.description}
+            </p>
           )}
         </div>
       ))}
