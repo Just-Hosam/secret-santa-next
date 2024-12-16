@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { SendIcon } from "lucide-react"
 
 export default function CloseEventButton() {
   const closeEvent = () => {
@@ -10,7 +9,7 @@ export default function CloseEventButton() {
 
   return (
     <Button className="w-full" onClick={closeEvent}>
-      Send Emails
+      Draw
     </Button>
   )
 }
