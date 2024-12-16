@@ -33,7 +33,7 @@ export default async function RootLayout({
           />
         </head>
         <body>
-          <nav className="px-6 flex justify-between items-center mb-1 gap-6 max-w-[1200px] m-auto pt-6 pb-10  top-0 left-0 right-0 bg-white sticky">
+          <nav className="px-6 flex justify-between items-center mb-1 gap-6 max-w-[1200px] m-auto pt-6 pb-8  top-0 left-0 right-0 bg-white sticky">
             <Link href="/">
               <Image
                 src="/secret-santa-logo.png"
