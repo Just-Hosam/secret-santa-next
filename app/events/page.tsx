@@ -60,11 +60,11 @@ export default async function Events() {
               className="mb-6"
             ></Image>
             <h3 className="font-semibold text-xl mb-2">No Events yet</h3>
-            <p className="mb-4">Get started by creating an event.</p>
+            <p className="mb-6">Get started by creating an event.</p>
             <Link href="events/new">
               <Button>
-                Create Event
                 <PlusIcon />
+                Create Event
               </Button>
             </Link>
           </div>

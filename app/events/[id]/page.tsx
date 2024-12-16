@@ -99,7 +99,7 @@ export default async function Event({ params }: Props) {
             className="mb-6"
           ></Image>
           <h3 className="font-semibold text-xl mb-2">No Participants yet</h3>
-          <p className="mb-4">
+          <p className="mb-6">
             Get started by sharing this event with your participants.
           </p>
           <CopyLinkButton
