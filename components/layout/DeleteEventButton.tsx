@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { redirect } from "next/navigation"
+import { toast } from "sonner"
 
 interface Props {
   eventId: string
@@ -13,6 +14,8 @@ export default function DeleteEventButton({ eventId }: Props) {
       method: "DELETE",
       body: JSON.stringify({ eventId: eventId }),
     })
+
+    toast.success("Event deleted!")
 
     redirect(`/events`)
   }

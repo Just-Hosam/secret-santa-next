@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth"
 import Image from "next/image"
 import Link from "next/link"
 import "./globals.css"
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
   title: "Secret Santa App",
@@ -54,6 +55,7 @@ export default async function RootLayout({
             </AuthCheck>
           </nav>
           <div className="max-w-[700px] m-auto">{children}</div>
+          <Toaster />
         </body>
       </html>
     </AuthProvider>

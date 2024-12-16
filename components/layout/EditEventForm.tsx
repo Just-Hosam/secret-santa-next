@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Event } from "@prisma/client"
 import { redirect } from "next/navigation"
+import { toast } from "sonner"
 
 interface Props {
   event?: Event | null
@@ -38,6 +39,10 @@ export default function EditEventForm({ event }: Props) {
     })
 
     await res.json()
+
+    // toast("Event saved!")
+    // Success toast
+    toast.success("Event saved!")
 
     isCreatingEvent ? redirect("/events") : redirect(`/events/${event?.id}`)
   }
