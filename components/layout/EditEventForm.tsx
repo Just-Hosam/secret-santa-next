@@ -40,8 +40,6 @@ export default function EditEventForm({ event }: Props) {
 
     await res.json()
 
-    // toast("Event saved!")
-    // Success toast
     toast.success("Event saved!")
 
     isCreatingEvent ? redirect("/events") : redirect(`/events/${event?.id}`)
