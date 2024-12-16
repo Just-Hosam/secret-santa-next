@@ -27,7 +27,7 @@ export default async function Events() {
 
   return (
     <div>
-      <header className="flex justify-between items-center gap-4 mb-6">
+      <header className="flex justify-between items-center gap-4 pb-6 sticky top-[88px] bg-white">
         <h2 className="text-3xl">My Events</h2>
         <Link href="events/new">
           <Button size="icon">

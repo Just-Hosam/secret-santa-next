@@ -14,6 +14,7 @@ import {
   SendIcon,
   Trash2Icon,
 } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 interface Props {
@@ -31,7 +32,7 @@ export default async function Event({ params }: Props) {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between gap-4">
+      <div className="pb-6 flex items-center justify-between gap-4 sticky bg-white top-[88px]">
         <Link href="/events">
           <Button variant="ghost" size="icon">
             <ArrowLeftIcon />
@@ -40,7 +41,7 @@ export default async function Event({ params }: Props) {
         <div className="flex items-center">
           <Popover>
             <PopoverTrigger asChild>
-              <Button size="icon" variant="ghost">
+              <Button size="icon" variant="ghost" className="mr-2">
                 <EllipsisVerticalIcon />
               </Button>
             </PopoverTrigger>
@@ -78,7 +79,21 @@ export default async function Event({ params }: Props) {
       {participants?.length ? (
         <Participants participants={participants} />
       ) : (
-        <div className="mt-2">No participants yet</div>
+        <div className="mt-10 flex flex-col items-center justify-center text-center">
+          <Image
+            src="/empty-mailbox.webp"
+            alt="Empty Mailbox"
+            width={160}
+            height={160}
+            className="mb-6"
+          ></Image>
+          <h3 className="font-semibold text-xl mb-2">No Participants!</h3>
+          <p className="mb-4">Copy and Share this event's link with others.</p>
+          <CopyLinkButton
+            text="Copy Event Link"
+            link={`${process.env.BASE_DOMAIN}/participant/${id}`}
+          />
+        </div>
       )}
     </div>
   )

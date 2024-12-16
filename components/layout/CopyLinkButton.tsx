@@ -6,9 +6,10 @@ import React from "react"
 
 interface Props {
   link: string
+  text?: string
 }
 
-export function CopyLinkButton({ link }: Props) {
+export function CopyLinkButton({ link, text }: Props) {
   const [copied, setCopied] = React.useState(false)
 
   const copyLink = () => {
@@ -19,14 +20,14 @@ export function CopyLinkButton({ link }: Props) {
   }
 
   return (
-    <Button variant="outline" className="ml-2" onClick={copyLink}>
+    <Button variant="outline" onClick={copyLink}>
       {copied ? (
         <>
           <CircleCheckBigIcon strokeWidth={2.5} color="green" /> Copied
         </>
       ) : (
         <>
-          <LinkIcon /> Copy
+          <LinkIcon /> {text || "Copy"}
         </>
       )}
     </Button>
