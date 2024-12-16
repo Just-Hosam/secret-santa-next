@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { authOptions } from "@/lib/auth-options"
+import prisma from "@/lib/prisma"
 import { Event } from "@prisma/client"
 import { PlusIcon } from "lucide-react"
 import { getServerSession } from "next-auth"
