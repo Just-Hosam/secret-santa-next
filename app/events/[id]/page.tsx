@@ -1,5 +1,16 @@
 import { CopyLinkButton } from "@/components/layout/CopyLinkButton"
+import DeleteParticipantButton from "@/components/layout/DeleteParticipantButton"
 import { Button } from "@/components/ui/button"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
 import {
   Popover,
   PopoverContent,
@@ -10,8 +21,8 @@ import { Participant } from "@prisma/client"
 import {
   ArrowLeftIcon,
   EllipsisVerticalIcon,
+  Gift,
   PencilIcon,
-  SendIcon,
   Trash2Icon,
 } from "lucide-react"
 import Image from "next/image"
@@ -65,10 +76,10 @@ export default async function Event({ params }: Props) {
           <CopyLinkButton
             link={`${process.env.BASE_DOMAIN}/participant/${id}`}
           />
-          <Link href={`/events/send/${id}`}>
+          <Link href={`/events/draw/${id}`}>
             <Button className="ml-2">
-              <SendIcon />
-              Send
+              <Gift />
+              Draw
             </Button>
           </Link>
         </div>
@@ -87,8 +98,10 @@ export default async function Event({ params }: Props) {
             height={160}
             className="mb-6"
           ></Image>
-          <h3 className="font-semibold text-xl mb-2">No Participants!</h3>
-          <p className="mb-4">Copy and Share this event's link with others.</p>
+          <h3 className="font-semibold text-xl mb-2">No Participants yet</h3>
+          <p className="mb-4">
+            Get started by sharing this event with your participants.
+          </p>
           <CopyLinkButton
             text="Copy Event Link"
             link={`${process.env.BASE_DOMAIN}/participant/${id}`}
@@ -105,10 +118,15 @@ const Participants = ({ participants }: { participants: Participant[] }) => {
     <div>
       {participants.map((participant) => (
         <div key={participant.id} className="mt-4 border-b pb-4 mb-4">
-          <h3 className="text-2xl">{participant.name}</h3>
-          <p className="italic text-gray-500 font-light text-xs text-[10px]">
-            {participant.email}
-          </p>
+          <div className="flex justify-between items-start gap-6">
+            <div>
+              <h3 className="text-2xl">{participant.name}</h3>
+              <p className="italic text-gray-500 font-light text-xs text-[10px]">
+                {participant.email}
+              </p>
+            </div>
+            <DeleteParticipant participantId={participant?.id} />
+          </div>
           {participant?.description && (
             <p className="mt-2 whitespace-pre-line">
               {participant.description}
@@ -117,5 +135,31 @@ const Participants = ({ participants }: { participants: Participant[] }) => {
         </div>
       ))}
     </div>
+  )
+}
+
+const DeleteParticipant = ({ participantId }: { participantId: string }) => {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <Trash2Icon />
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Delete Participant</DrawerTitle>
+          <DrawerDescription>
+            Are you sure you want to delete this participant?
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <DeleteParticipantButton participantId={participantId} />
+          <DrawerClose asChild>
+            <Button variant="ghost">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
   )
 }

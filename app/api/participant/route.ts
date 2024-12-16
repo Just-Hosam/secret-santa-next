@@ -19,3 +19,13 @@ export async function POST(req: Request) {
 
   return NextResponse.json(participant)
 }
+
+export async function DELETE(req: Request) {
+  const participantData = await req.json()
+
+  const event = await prisma?.participant.delete({
+    where: { id: participantData.participantId },
+  })
+
+  return NextResponse.json(event)
+}
