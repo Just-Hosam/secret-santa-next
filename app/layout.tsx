@@ -23,7 +23,7 @@ export default async function RootLayout({
 
   return (
     <AuthProvider>
-      <html className="font-mont text-base px-6 pb-10 " lang="en">
+      <html className="font-mont text-base" lang="en">
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -33,7 +33,7 @@ export default async function RootLayout({
           />
         </head>
         <body>
-          <nav className="flex justify-between items-center mb-1 gap-6 max-w-[1200px] m-auto py-6  top-0 left-0 right-0 bg-white sticky">
+          <nav className="px-6 pb-10 flex justify-between items-center mb-1 gap-6 max-w-[1200px] m-auto py-6  top-0 left-0 right-0 bg-white sticky">
             <Link href="/">
               <Image
                 src="/secret-santa-logo.png"
@@ -49,7 +49,7 @@ export default async function RootLayout({
               </div>
             </AuthCheck>
           </nav>
-          <div className="max-w-[700px] m-auto">{children}</div>
+          <div className="px-6 max-w-[700px] m-auto">{children}</div>
           <Toaster />
         </body>
       </html>
