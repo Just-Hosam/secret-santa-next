@@ -3,24 +3,6 @@ import prisma from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { NextResponse } from "next/server"
 
-export async function GET() {
-  const session = await getServerSession(authOptions)
-  const currentUserEmail = session?.user?.email!
-
-  const events = await prisma?.event.findMany({
-    where: {
-      user: {
-        email: currentUserEmail,
-      },
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
-
-  return NextResponse.json(events)
-}
-
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
   const currentUserEmail = session?.user?.email!

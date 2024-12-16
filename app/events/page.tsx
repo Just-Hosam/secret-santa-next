@@ -12,9 +12,17 @@ export default async function Events() {
 
   if (isNotAuthenticated) redirect("/")
 
-  const events = await fetch(`${process.env.BASE_DOMAIN}/api/events`).then(
-    (res) => res.json()
-  )
+  const events =
+    (await prisma?.event.findMany({
+      where: {
+        user: {
+          email: session?.user?.email,
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    })) || []
 
   return (
     <div>
