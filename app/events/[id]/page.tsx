@@ -1,8 +1,19 @@
 import { CopyLinkButton } from "@/components/layout/CopyLinkButton"
 import { Button } from "@/components/ui/button"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import prisma from "@/lib/prisma"
 import { Participant } from "@prisma/client"
-import { ArrowLeftIcon, PencilIcon, SendIcon, Trash2Icon } from "lucide-react"
+import {
+  ArrowLeftIcon,
+  EllipsisVerticalIcon,
+  PencilIcon,
+  SendIcon,
+  Trash2Icon,
+} from "lucide-react"
 import Link from "next/link"
 
 interface Props {
@@ -27,23 +38,36 @@ export default async function Event({ params }: Props) {
           </Button>
         </Link>
         <div className="flex items-center">
-          <Link href={`/events/new/${id}`}>
-            <Button variant="ghost" size="icon">
-              <PencilIcon />
-            </Button>
-          </Link>
-          <Link href={`/events/delete/${id}`}>
-            <Button variant="ghost" size="icon">
-              <Trash2Icon />
-            </Button>
-          </Link>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button size="icon" variant="ghost">
+                <EllipsisVerticalIcon />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-fit">
+              <div className="flex flex-col">
+                <Link href={`/events/new/${id}`}>
+                  <Button className="w-full justify-start" variant="ghost">
+                    <PencilIcon />
+                    Edit
+                  </Button>
+                </Link>
+                <Link href={`/events/delete/${id}`}>
+                  <Button className="w-full" variant="ghost">
+                    <Trash2Icon />
+                    Delete
+                  </Button>
+                </Link>
+              </div>
+            </PopoverContent>
+          </Popover>
           <CopyLinkButton
             link={`${process.env.BASE_DOMAIN}/participant/${id}`}
           />
           <Link href={`/events/send/${id}`}>
             <Button className="ml-2">
-              Send
               <SendIcon />
+              Send
             </Button>
           </Link>
         </div>
