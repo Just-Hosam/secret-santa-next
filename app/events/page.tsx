@@ -27,7 +27,7 @@ export default async function Events() {
 
   return (
     <div>
-      <header className="flex justify-between items-center gap-4 mb-5">
+      <header className="flex justify-between items-center gap-4 mb-6">
         <h2 className="text-3xl">My Events</h2>
         <Link href="events/new">
           <Button size="icon">
@@ -41,7 +41,9 @@ export default async function Events() {
             <div className="border rounded-2xl p-4 mb-3">
               <h3 className="text-xl font-semibold">{event.name}</h3>
               {event?.description && (
-                <p className="text-light text-sm mt-2">{event.description}</p>
+                <p className="whitespace-pre-line text-light text-sm mt-2">
+                  {event.description}
+                </p>
               )}
             </div>
           </Link>

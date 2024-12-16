@@ -44,12 +44,7 @@ export default async function RootLayout({
             </Link>
             <AuthCheck>
               <div className="flex items-center gap-3">
-                <div className="text-right">
-                  <p>{session?.user?.name}</p>
-                  <p className="text-gray-500 text-xs text-[10px] italic">
-                    {session?.user?.email}
-                  </p>
-                </div>
+                <p className="text-right">{session?.user?.name}</p>
                 <SignOutButton />
               </div>
             </AuthCheck>
