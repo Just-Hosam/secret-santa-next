@@ -26,17 +26,15 @@ export default async function CloseEvent({ params }: Props) {
         santa pick. This will also prevent any further participations from being
         added.
       </p>
-      <p className="mt-4 font-semibold">
+      <p className="mt-4 mb-8 font-semibold">
         Are you sure you want to finalize this event?
       </p>
-      <div className="mt-8 flex items-center gap-2">
-        <Link className="w-full" href={`/events/${event?.id}`}>
-          <Button className="w-full" variant="outline">
-            Cancel
-          </Button>
-        </Link>
-        <CloseEventButton />
-      </div>
+      <CloseEventButton />
+      <Link className="w-full " href={`/events/${event?.id}`}>
+        <Button className="w-full mt-2" variant="ghost">
+          Cancel
+        </Button>
+      </Link>
     </div>
   )
 }

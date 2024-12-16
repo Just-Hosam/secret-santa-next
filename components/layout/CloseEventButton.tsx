@@ -11,7 +11,6 @@ export default function CloseEventButton() {
   return (
     <Button className="w-full" onClick={closeEvent}>
       Send Emails
-      <SendIcon />
     </Button>
   )
 }
