@@ -41,35 +41,32 @@ export async function POST(req: Request) {
       data: { closed: true },
     })
 
-    let timeout = 0
-
-    participants.forEach(async (participant, i) => {
+    for (let i = 0; i < participants.length; i++) {
+      const participant = participants[i]
       const receiver = shuffled[i]
 
-      setTimeout(async () => {
-        await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${RESEND_API_KEY}`,
-          },
-          body: JSON.stringify({
-            from: "Secret Santa <no-reply@samdahrooge.com>",
-            to: [participant.email],
-            subject: "Your Secret Santa Assignment",
-            html: `
-              <h2>Hi ${participant.name},</h2>
-              <p>You will be the Secret Santa for <strong>${receiver.name}</strong>.</p>
-              <p style="white-space: pre-line;">Note: 
-              ${receiver.description}</p>
-              <p>Happy gifting!</p>
-            `,
-          }),
-        })
-      }, timeout)
+      await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: "Secret Santa <no-reply@samdahrooge.com>",
+          to: [participant.email],
+          subject: "Your Secret Santa Assignment",
+          html: `
+            <h2>Hi ${participant.name},</h2>
+            <p>You will be the Secret Santa for <strong>${receiver.name}</strong>.</p>
+            <p style="white-space: pre-line;">Note: 
+            ${receiver.description}</p>
+            <p>Happy gifting!</p>
+          `,
+        }),
+      })
 
-      timeout += 1250
-    })
+      await delay(1000)
+    }
 
     return Response.json({ success: true })
   } catch (error) {
@@ -83,4 +80,8 @@ export async function POST(req: Request) {
 
 function isValidDerangement(original: any[], shuffled: any[]): boolean {
   return shuffled.every((item, i) => item.id !== original[i].id)
+}
+
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
