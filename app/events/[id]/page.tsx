@@ -87,9 +87,8 @@ export default async function Event({ params }: Props) {
               link={`${process.env.BASE_DOMAIN}/participant/${id}`}
             />
           )}
-
           <Link hidden={event?.closed} href={`/events/draw/${id}`}>
-            <Button>
+            <Button disabled={participants?.length < 2}>
               <Gift />
               Draw
             </Button>
@@ -98,9 +97,9 @@ export default async function Event({ params }: Props) {
       </div>
       {event?.closed && (
         <div className="border-2 rounded-lg bg-gray-100 flex p-6 mb-6 border-gray-200 gap-3 text-sm">
-          <InfoIcon size={32} />
+          <InfoIcon className="min-w-[22px]" />
           <div>
-            <p className="text-base">
+            <p className="text-base mb-2">
               This event is <strong>closed</strong>.
             </p>
             Names have been drawn and participants have been notified. You can
