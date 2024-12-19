@@ -17,11 +17,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import prisma from "@/lib/prisma"
-import { Participant } from "@prisma/client"
 import {
   ArrowLeftIcon,
+  CornerDownRightIcon,
   EllipsisVerticalIcon,
   Gift,
+  InfoIcon,
   PencilIcon,
   Trash2Icon,
   UsersIcon,
@@ -40,6 +41,11 @@ export default async function Event({ params }: Props) {
   const participants = await prisma?.participant.findMany({
     where: { eventId: id },
     orderBy: { createdAt: "desc" },
+    include: {
+      assignedTo: {
+        select: { name: true },
+      },
+    },
   })
 
   return (
@@ -59,12 +65,14 @@ export default async function Event({ params }: Props) {
             </PopoverTrigger>
             <PopoverContent className="w-fit">
               <div className="flex flex-col">
-                <Link href={`/events/new/${id}`}>
-                  <Button className="w-full justify-start" variant="ghost">
-                    <PencilIcon />
-                    Edit
-                  </Button>
-                </Link>
+                {!event?.closed && (
+                  <Link href={`/events/new/${id}`}>
+                    <Button className="w-full justify-start" variant="ghost">
+                      <PencilIcon />
+                      Edit
+                    </Button>
+                  </Link>
+                )}
                 <Link href={`/events/delete/${id}`}>
                   <Button className="w-full" variant="ghost">
                     <Trash2Icon />
@@ -74,10 +82,13 @@ export default async function Event({ params }: Props) {
               </div>
             </PopoverContent>
           </Popover>
-          <CopyLinkButton
-            link={`${process.env.BASE_DOMAIN}/participant/${id}`}
-          />
-          <Link href={`/events/draw/${id}`}>
+          {!event?.closed && (
+            <CopyLinkButton
+              link={`${process.env.BASE_DOMAIN}/participant/${id}`}
+            />
+          )}
+
+          <Link hidden={event?.closed} href={`/events/draw/${id}`}>
             <Button className="ml-2">
               <Gift />
               Draw
@@ -85,6 +96,18 @@ export default async function Event({ params }: Props) {
           </Link>
         </div>
       </div>
+      {event?.closed && (
+        <div className="border-2 rounded-lg bg-gray-100 flex p-6 mb-6 border-gray-200 gap-3 text-sm">
+          <InfoIcon size={32} />
+          <div>
+            <p className="text-base mb-3">
+              This event is <strong>closed</strong>.
+            </p>
+            Names have been drawn and participants have been notified. You can
+            no longer modify this event.
+          </div>
+        </div>
+      )}
       <h2 className="text-3xl font-semibold mb-4">{event?.name}</h2>
       <p className="mb-10 whitespace-pre-line">{event?.description}</p>
       <div className="flex gap-3 items-center text-xl font-semibold">
@@ -92,7 +115,7 @@ export default async function Event({ params }: Props) {
         <h4 className="">Participants</h4>
       </div>
       {participants?.length ? (
-        <Participants participants={participants} />
+        <Participants participants={participants} event={event} />
       ) : (
         <div className="mt-10 flex flex-col items-center justify-center text-center">
           <Image
@@ -117,7 +140,13 @@ export default async function Event({ params }: Props) {
 }
 
 // Participants list component
-const Participants = ({ participants }: { participants: Participant[] }) => {
+const Participants = ({
+  participants,
+  event,
+}: {
+  participants: any[]
+  event: any
+}) => {
   return (
     <div>
       {participants.map((participant) => (
@@ -129,12 +158,24 @@ const Participants = ({ participants }: { participants: Participant[] }) => {
                 {participant.email}
               </p>
             </div>
-            <DeleteParticipant participantId={participant?.id} />
+            {!event?.closed && (
+              <DeleteParticipant participantId={participant?.id} />
+            )}
           </div>
           {participant?.description && (
             <p className="mt-4 whitespace-pre-line">
               {participant.description}
             </p>
+          )}
+          {event?.closed && (
+            <div className="flex gap-2 mt-4 items-end text-lg">
+              <CornerDownRightIcon
+                className="text-gray-400 self-start"
+                strokeWidth={1.5}
+                size={35}
+              />
+              <p>{participant?.assignedTo?.name}</p>
+            </div>
           )}
         </div>
       ))}

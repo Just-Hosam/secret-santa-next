@@ -28,7 +28,7 @@ export default async function Events() {
 
   return (
     <div>
-      <header className="flex justify-between items-center gap-4 pb-6 sticky top-[88px] bg-white">
+      <header className="flex justify-between items-center gap-4 pb-8 sticky top-[88px] bg-white">
         <h2 className="text-3xl">My Events</h2>
         <Link href="events/new">
           <Button size="icon">
@@ -40,11 +40,16 @@ export default async function Events() {
         {events.length ? (
           events.map((event: Event) => (
             <Link href={`/events/${event.id}`} key={event.id}>
-              <div className="border rounded-2xl p-4 mb-3">
+              <div className="border rounded-2xl p-6 mb-4">
                 <h3 className="text-xl font-semibold">{event.name}</h3>
                 {event?.description && (
-                  <p className="whitespace-pre-line text-light text-sm mt-2">
+                  <p className="whitespace-pre-line text-light text-sm mt-3">
                     {event.description}
+                  </p>
+                )}
+                {event?.closed && (
+                  <p className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-1.5 text-xs text-gray-600 ring-1 ring-inset ring-gray-500/10 mt-6">
+                    Closed
                   </p>
                 )}
               </div>
