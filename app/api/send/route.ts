@@ -60,15 +60,15 @@ export async function POST(req: Request) {
             html: `
               <h2>Hi ${participant.name},</h2>
               <p>You will be the Secret Santa for <strong>${receiver.name}</strong>.</p>
-              <p>Description:</p>
-              <p style="white-space: pre-line;">${receiver.description}</p>
+              <p style="white-space: pre-line;">Note: 
+              ${receiver.description}</p>
               <p>Happy gifting!</p>
             `,
           }),
         })
       }, timeout)
 
-      timeout += 1000
+      timeout += 1250
     })
 
     return Response.json({ success: true })
