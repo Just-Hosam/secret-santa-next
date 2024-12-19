@@ -2,9 +2,16 @@
 
 import { Button } from "@/components/ui/button"
 
-export default function CloseEventButton() {
-  const closeEvent = () => {
-    console.log("SEND EMAILS")
+interface Props {
+  eventId: string
+}
+
+export default function CloseEventButton({ eventId }: Props) {
+  const closeEvent = async () => {
+    await fetch("/api/send", {
+      method: "POST",
+      body: JSON.stringify({ eventId }),
+    })
   }
 
   return (

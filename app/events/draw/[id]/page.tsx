@@ -31,7 +31,7 @@ export default async function CloseEvent({ params }: Props) {
       <p className="mt-4 mb-8 font-semibold">
         Ready to draw names and start the gift exchange?
       </p>
-      <CloseEventButton />
+      <CloseEventButton eventId={id} />
       <Link className="w-full " href={`/events/${event?.id}`}>
         <Button className="w-full mt-2" variant="ghost">
           Cancel
