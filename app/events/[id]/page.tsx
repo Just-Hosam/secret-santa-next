@@ -50,16 +50,16 @@ export default async function Event({ params }: Props) {
 
   return (
     <div>
-      <div className="pb-6 flex items-center justify-between gap-4 sticky bg-white top-[88px]">
+      <div className="pb-4 flex items-center justify-between gap-4 sticky bg-white top-[88px]">
         <Link href="/events">
           <Button variant="ghost" size="icon">
             <ArrowLeftIcon />
           </Button>
         </Link>
-        <div className="flex items-center">
+        <div className="flex gap-2 items-center">
           <Popover>
             <PopoverTrigger asChild>
-              <Button size="icon" variant="ghost" className="mr-2">
+              <Button size="icon" variant="ghost">
                 <EllipsisVerticalIcon />
               </Button>
             </PopoverTrigger>
@@ -89,7 +89,7 @@ export default async function Event({ params }: Props) {
           )}
 
           <Link hidden={event?.closed} href={`/events/draw/${id}`}>
-            <Button className="ml-2">
+            <Button>
               <Gift />
               Draw
             </Button>
@@ -100,7 +100,7 @@ export default async function Event({ params }: Props) {
         <div className="border-2 rounded-lg bg-gray-100 flex p-6 mb-6 border-gray-200 gap-3 text-sm">
           <InfoIcon size={32} />
           <div>
-            <p className="text-base mb-3">
+            <p className="text-base">
               This event is <strong>closed</strong>.
             </p>
             Names have been drawn and participants have been notified. You can
@@ -108,7 +108,7 @@ export default async function Event({ params }: Props) {
           </div>
         </div>
       )}
-      <h2 className="text-3xl font-semibold mb-4">{event?.name}</h2>
+      <h2 className="text-2xl font-semibold mb-4 mt-4">{event?.name}</h2>
       <p className="mb-10 whitespace-pre-line">{event?.description}</p>
       <div className="flex gap-3 items-center text-xl font-semibold">
         <UsersIcon />

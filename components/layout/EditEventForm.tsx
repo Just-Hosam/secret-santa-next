@@ -54,7 +54,7 @@ export default function EditEventForm({ event }: Props) {
         className="mb-4 mt-1"
         type="text"
         name="name"
-        placeholder="Enter the event's name here!"
+        placeholder="e.g. Office Secret Santa"
         defaultValue={event?.name || ""}
         required
       ></Input>
@@ -64,7 +64,7 @@ export default function EditEventForm({ event }: Props) {
       <Textarea
         className="mt-1 mb-6 min-h-[250px]"
         name="description"
-        placeholder="Enter the event's description here!"
+        placeholder={`e.g. A fun gift exchange! \n \n Rules: \n - $20 limit \n - No gift cards`}
         defaultValue={event?.description || ""}
       />
       <Button type="submit" className="w-full">
