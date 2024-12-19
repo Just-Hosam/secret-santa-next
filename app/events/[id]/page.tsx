@@ -24,6 +24,7 @@ import {
   Gift,
   PencilIcon,
   Trash2Icon,
+  UsersIcon,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -86,7 +87,10 @@ export default async function Event({ params }: Props) {
       </div>
       <h2 className="text-3xl font-semibold mb-4">{event?.name}</h2>
       <p className="mb-10 whitespace-pre-line">{event?.description}</p>
-      <h4 className="text-xl font-semibold">Participants</h4>
+      <div className="flex gap-3 items-center text-xl font-semibold">
+        <UsersIcon />
+        <h4 className="">Participants</h4>
+      </div>
       {participants?.length ? (
         <Participants participants={participants} />
       ) : (
@@ -117,7 +121,7 @@ const Participants = ({ participants }: { participants: Participant[] }) => {
   return (
     <div>
       {participants.map((participant) => (
-        <div key={participant.id} className="mt-4 border-b pb-4 mb-4">
+        <div key={participant.id} className="mt-4 border p-5 mb-4 rounded-xl">
           <div className="flex justify-between items-start gap-6">
             <div>
               <h3 className="text-2xl">{participant.name}</h3>
@@ -128,7 +132,7 @@ const Participants = ({ participants }: { participants: Participant[] }) => {
             <DeleteParticipant participantId={participant?.id} />
           </div>
           {participant?.description && (
-            <p className="mt-2 whitespace-pre-line">
+            <p className="mt-4 whitespace-pre-line">
               {participant.description}
             </p>
           )}
