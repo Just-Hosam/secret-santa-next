@@ -41,32 +41,8 @@ export async function POST(req: Request) {
       data: { closed: true },
     })
 
-    for (let i = 0; i < participants.length; i++) {
-      const participant = participants[i]
-      const receiver = shuffled[i]
-
-      await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
-          from: "Secret Santa <no-reply@samdahrooge.com>",
-          to: [participant.email],
-          subject: "Your Secret Santa Assignment",
-          html: `
-            <h2>Hi ${participant.name},</h2>
-            <p>You will be the Secret Santa for <strong>${receiver.name}</strong>.</p>
-            <p style="white-space: pre-line;">Note: 
-            ${receiver.description}</p>
-            <p>Happy gifting!</p>
-          `,
-        }),
-      })
-
-      await delay(1000)
-    }
+    // Send emails
+    Promise.resolve(sendEmails(participants, shuffled))
 
     return Response.json({ success: true })
   } catch (error) {
@@ -84,4 +60,37 @@ function isValidDerangement(original: any[], shuffled: any[]): boolean {
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+// Separate email sending function
+async function sendEmails(participants: any[], shuffled: any[]) {
+  for (let i = 0; i < participants.length; i++) {
+    const participant = participants[i]
+    const receiver = shuffled[i]
+
+    try {
+      await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: "Secret Santa <no-reply@samdahrooge.com>",
+          to: [participant.email],
+          subject: "Your Secret Santa Assignment",
+          html: `
+            <h2>Hi ${participant.name},</h2>
+            <p>You will be the Secret Santa for <strong>${receiver.name}</strong>.</p>
+            <p style="white-space: pre-line;">Note:
+            ${receiver.description}</p>
+            <p>Happy gifting!</p>
+          `,
+        }),
+      })
+      await delay(1000)
+    } catch (error) {
+      console.error(`Failed to send email to ${participant.email}:`, error)
+    }
+  }
 }
