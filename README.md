@@ -4,7 +4,7 @@ A modern web application for organizing Secret Santa gift exchanges with ease.
 
 ## Overview
 
-Visit the app: [secretsanta.samdahrooge.com](secretsanta.samdahrooge.com)
+Visit the app: <a href="secretsanta.samdahrooge.com" target="_blank">secretsanta.samdahrooge.com</a>
 
 This app helps you:
 
