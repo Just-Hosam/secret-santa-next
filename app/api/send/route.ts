@@ -88,7 +88,7 @@ async function sendEmails(participants: any[], shuffled: any[]) {
           `,
         }),
       })
-      await delay(1000)
+      await delay(1500)
     } catch (error) {
       console.error(`Failed to send email to ${participant.email}:`, error)
     }

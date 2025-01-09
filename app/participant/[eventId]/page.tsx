@@ -12,7 +12,7 @@ export default async function ParticipantFormPage({ params }: Props) {
   return (
     <div>
       <h2 className="text-3xl font-semibold mb-4">{event?.name}</h2>
-      <p className="mb-6">{event?.description}</p>
+      <p className="mb-6 whitespace-pre-line">{event?.description}</p>
 
       <ParticipantForm eventId={eventId} />
     </div>
